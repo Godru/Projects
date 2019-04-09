@@ -4,10 +4,11 @@ class Block extends Component{
     constructor(props){
         super(props);
         this.state = {
-            Block: {},
+            block: undefined,
             blockNumber: undefined
         };
     }
+
     render(){
     this.state.block = this.props.block;
     this.state.blockNumber = this.props.blockNumber;
@@ -16,4 +17,3 @@ class Block extends Component{
     );
 };
 }export default Block;
-/*<li key={i} className="Block"> {Block} </li>*/

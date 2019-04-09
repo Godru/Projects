@@ -54,7 +54,7 @@ export default class Table extends Component{
         InsertionSort(key,arr){
             var n = key.length;
             for (var i = 1; i < n; i++) {
-                var v = key[i],vArr = arr[i],  j = i - 1
+                var v = key[i],vArr = arr[i],  j = i - 1;
                 while (j >= 0 && key[j] > v) {
                     arr[j + 1] = arr[j];
                     key[j + 1] = key[j];
@@ -68,12 +68,13 @@ export default class Table extends Component{
         arrowClick(key){
             if(this.state.isSorted !== key) {
                 this.setState(function (prevState) {
+                    var prop;
                     prevState.isSorted= key;
                     prevState.persons = this.InsertionSort(prevState.persons.map(person => person[key]), prevState.persons);
-                    for (var prop in prevState.arrowColor) {
+                    for (prop in prevState.arrowColor) {
                         prevState.arrowColor[prop] = 'black';
                     }
-                    for (var prop in prevState.arrowDirection) {
+                    for (prop in prevState.arrowDirection) {
                         prevState.arrowDirection[prop] = 'arrow-down';
                     }
                     prevState.arrowColor[key] = 'blue';
@@ -105,9 +106,9 @@ export default class Table extends Component{
         }
         pageNumbers(){
             var pages = [];
-            if(this.state.persons.length/10>10){
+            if(this.state.persons.length/50>10){
                 pages[0] =  <PageNumber key = {0} updateData={this.updatePage} activePage = {this.state.page} pageNumber = {1}/>;
-                if(this.state.page > 4 && this.state.page < this.state.persons.length/10-4) {
+                if(this.state.page > 4 && this.state.page < this.state.persons.length/50-4) {
                     for (var i = this.state.page - 4; i < this.state.page + 4; i++) {
                         pages[i] = <PageNumber key = {i} updateData={this.updatePage} activePage = {this.state.page} pageNumber={i + 1}/>;
                     }
@@ -117,23 +118,22 @@ export default class Table extends Component{
                             pages[i] = <PageNumber key = {i} updateData={this.updatePage} activePage = {this.state.page} pageNumber={i + 1}/>;
                         }
                     }else
-                    if(this.state.page >= this.state.persons.length/10-4){
-                        for (var i = Math.ceil(this.state.persons.length/10-7); i < Math.ceil(this.state.persons.length/10)-1; i++) {
+                    if(this.state.page >= this.state.persons.length/50-4){
+                        for (var i = Math.ceil(this.state.persons.length/50-7); i < Math.ceil(this.state.persons.length/50)-1; i++) {
                             pages[i] = <PageNumber key = {i} updateData={this.updatePage} activePage = {this.state.page} pageNumber={i + 1}/>;
                         }
                     }
                 }
-                pages[Math.ceil(this.state.persons.length/10)] =  <PageNumber key = {Math.ceil(this.state.persons.length/10)} updateData={this.updatePage} activePage = {this.state.page} pageNumber = {Math.ceil(this.state.persons.length/10)}/>;
+                pages[Math.ceil(this.state.persons.length/50)] =  <PageNumber key = {Math.ceil(this.state.persons.length/50)} updateData={this.updatePage} activePage = {this.state.page} pageNumber = {Math.ceil(this.state.persons.length/50)}/>;
             }else
-            for(var i=0;i<this.state.persons.length/10;i++){
+            for(var i=0;i<this.state.persons.length/50;i++){
                 pages[i] =  <PageNumber key = {i} updateData={this.updatePage} activePage = {this.state.page} pageNumber = {i+1}/>;
             }
             return  pages;
         }
-            rendCol=(key) => this.state.persons.map(person => person[key]).slice((this.state.page-1)*10,(this.state.page-1)*10+10);
+            rendCol=(key) => this.state.persons.map(person => person[key]).slice((this.state.page-1)*50,(this.state.page-1)*50+50);
 
         render() {
-          //  this.state.persons = this.props.persons;
             return (
                 <div className = "Table">
                     <div className ="Table__cols">

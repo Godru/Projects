@@ -10,7 +10,7 @@ class Col extends Component{
         };
     }
     updateData = (value) => {
-        this.props.updateData(value + (this.props.page-1)*10);
+        this.props.updateData(value + (this.props.page-1)*50);
     };
 
 
